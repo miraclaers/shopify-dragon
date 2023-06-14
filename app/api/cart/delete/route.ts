@@ -15,8 +15,8 @@ export async function POST(req: NextRequest): Promise<any> {
 		);
 	}
 	try {
-		await removeFromCart(cartId, lineIds);
-		return NextResponse.json({ status: 204 });
+		const cart = await removeFromCart(cartId, lineIds);
+		return NextResponse.json({ status: 204, cart });
 	} catch (e) {
 		if (isShopifyError(e)) {
 			return NextResponse.json(
